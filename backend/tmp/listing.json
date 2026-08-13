@@ -1,0 +1,20 @@
+{
+  "host_id": 1,
+  "title": "Test Listing API",
+  "description": "Test desc",
+  "property_type": "Apartment",
+  "price_per_night": 50,
+  "location_city": "TestCity",
+  "location_country": "TestLand",
+  "max_guests": 2,
+  "bedrooms": 1,
+  "beds": 1,
+  "bathrooms": 1,
+  "photo_urls": [
+    "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c"
+  ],
+  "amenity_ids": [
+    1,
+    2
+  ]
+}

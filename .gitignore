@@ -1,0 +1,20 @@
+# Python
+backend/.venv/
+backend/__pycache__/
+*.pyc
+
+# Database
+backend/airbnb.db
+*.db
+
+# Next.js
+frontend/node_modules/
+frontend/.next/
+
+# Environment variables
+frontend/.env.local
+backend/.env
+
+# OS
+.DS_Store
+Thumbs.db
