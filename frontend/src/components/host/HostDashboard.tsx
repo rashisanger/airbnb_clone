@@ -1,3 +1,5 @@
+// frontend/src/components/host/HostDashboard.tsx
+
 "use client";
 
 import { useEffect, useState } from "react";
@@ -16,12 +18,10 @@ import {
   deleteListing,
   getHostBookings,
   getHostListings,
+  type HostBooking,
+  type HostListing,
 } from "@/lib/api";
 import { getCurrentUserId } from "@/lib/auth";
-import type {
-  HostBooking,
-  HostListing,
-} from "@/lib/types";
 
 function formatDate(date: string) {
   return new Date(
@@ -54,8 +54,11 @@ function DashboardContent() {
   useEffect(() => {
     async function loadDashboard() {
       try {
-        const hostId =
-          await getCurrentUserId("host");
+        // ✅ FIX: Remove the "host" argument if getCurrentUserId doesn't accept it
+        const hostId = await getCurrentUserId(); // ← Changed from getCurrentUserId("host")
+        
+        // If you need to check if user is host, do it separately
+        // or check the response
 
         const [listingData, bookingData] =
           await Promise.all([

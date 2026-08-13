@@ -1,13 +1,14 @@
+// frontend/src/components/ExploreClient.tsx
+
 "use client";
 
 import { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 
-import { getListings, toggleFavorite } from "@/lib/api";
+import { getListings, toggleFavorite, type PaginatedListings } from "@/lib/api";
 import { getCurrentUserId } from "@/lib/auth";
 import type {
   ListingSearchParams,
-  PaginatedListings,
 } from "@/lib/api";
 import type { ListingSummary } from "@/lib/types";
 
@@ -123,7 +124,6 @@ export default function ExploreClient({
     initialTotal,
   ]);
 
-
   async function loadMore() {
     const nextPage = page + 1;
 
@@ -176,9 +176,7 @@ export default function ExploreClient({
     }
   }
 
-
   const hasMore = listings.length < total;
-
 
   return (
     <main className="mx-auto max-w-[1600px] px-5 pb-16 md:px-8">
@@ -186,7 +184,6 @@ export default function ExploreClient({
       <SearchBar />
 
       <FilterBar />
-
 
       {/* Results */}
       <section className="mt-8">
@@ -226,7 +223,6 @@ export default function ExploreClient({
               ))}
             </div>
 
-
             {/* Load More pagination */}
             {hasMore && (
               <div className="mt-12 flex justify-center">
@@ -250,7 +246,6 @@ export default function ExploreClient({
   );
 }
 
-
 function SkeletonGrid() {
   return (
     <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -273,7 +268,6 @@ function SkeletonGrid() {
     </div>
   );
 }
-
 
 function EmptyState() {
   return (

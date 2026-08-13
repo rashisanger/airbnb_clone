@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Loader2 } from "lucide-react";
 
-import ListingForm from "@/components/ListingForm";
+import ListingForm from "@/components/host/ListingForm";
 
 import {
   createListing,

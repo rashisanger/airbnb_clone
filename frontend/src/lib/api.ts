@@ -1,17 +1,66 @@
+// frontend/src/lib/api.ts
+
 import type {
   AvailabilityRange,
   Booking,
-  BookingCreate,
   HostBooking,
   HostListing,
   Listing,
   ListingCreate,
   ListingSummary,
   ListingUpdate,
-  MyBooking,
-  PaginatedListings,
   User,
 } from "./types";
+
+// ✅ Define missing types here (these didn't exist in types.ts)
+export interface BookingCreate {
+  listing_id: number;
+  guest_id: number;
+  check_in: string;
+  check_out: string;
+  num_guests: number;
+  total_price: number;
+}
+
+export interface MyBooking {
+  id: number;
+  listing_id: number;
+  listing_title: string;
+  listing_photo?: string;
+  check_in: string;
+  check_out: string;
+  num_guests: number;
+  total_price: number;
+  status: string;
+}
+
+export interface PaginatedListings {
+  items: ListingSummary[];
+  total: number;
+  page: number;
+  page_size: number;
+  total_pages: number;
+}
+
+// ✅ Re-export types from ./types that exist there
+export type {
+  AvailabilityRange,
+  Booking,
+  HostBooking,
+  HostListing,
+  Listing,
+  ListingCreate,
+  ListingSummary,
+  ListingUpdate,
+  User,
+};
+
+// ❌ REMOVED: These were causing conflicts because they're already exported above
+// export type {
+//   BookingCreate,  // ← Already exported as interface above
+//   MyBooking,      // ← Already exported as interface above
+//   PaginatedListings, // ← Already exported as interface above
+// };
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
@@ -111,14 +160,6 @@ export async function getAvailability(
     blocked_dates: AvailabilityRange[];
   }>(`/listings/${id}/availability`);
 
-  // Backend returns:
-  // {
-  //   listing_id: 1,
-  //   blocked_dates: [...]
-  // }
-  //
-  // DateRangePicker expects the array itself,
-  // so return only blocked_dates.
   return result.blocked_dates;
 }
 
@@ -240,10 +281,6 @@ export async function getFavorites(
     `/favorites/me?user_id=${userId}`
   );
 }
-
-// ============================================================
-// Mock Authentication
-// ============================================================
 
 // ============================================================
 // Mock Authentication
