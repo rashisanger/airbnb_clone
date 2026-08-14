@@ -257,6 +257,7 @@ export default function ListingDetailPage() {
           check_in: checkIn,
           check_out: checkOut,
           num_guests: guests,
+          total_price: total,
         });
 
       router.push(
