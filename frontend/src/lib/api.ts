@@ -9,6 +9,7 @@ import type {
   ListingCreate,
   ListingSummary,
   ListingUpdate,
+  MyBooking,
   User,
 } from "./types";
 
@@ -20,18 +21,6 @@ export interface BookingCreate {
   check_out: string;
   num_guests: number;
   total_price: number;
-}
-
-export interface MyBooking {
-  id: number;
-  listing_id: number;
-  listing_title: string;
-  listing_photo?: string;
-  check_in: string;
-  check_out: string;
-  num_guests: number;
-  total_price: number;
-  status: string;
 }
 
 export interface PaginatedListings {
@@ -52,15 +41,9 @@ export type {
   ListingCreate,
   ListingSummary,
   ListingUpdate,
+  MyBooking,
   User,
 };
-
-// ❌ REMOVED: These were causing conflicts because they're already exported above
-// export type {
-//   BookingCreate,  // ← Already exported as interface above
-//   MyBooking,      // ← Already exported as interface above
-//   PaginatedListings, // ← Already exported as interface above
-// };
 
 const API_URL =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
