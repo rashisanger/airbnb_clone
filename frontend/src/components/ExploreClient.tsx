@@ -88,15 +88,15 @@ export default function ExploreClient({
       page_size: 12,
     };
 
-    // If there are no search params, the server data
-    // is already correct, so avoid another request.
-    if (searchParams.toString() === "") {
+    // If there are no search params AND we already have listings, use the server data
+    if (searchParams.toString() === "" && initialListings.length > 0) {
       setListings(initialListings);
       setTotal(initialTotal);
       setPage(1);
       return;
     }
 
+    // If there are no search params AND no initial listings, fetch from API
     async function fetchListings() {
       try {
         setLoading(true);
