@@ -46,6 +46,11 @@ def seed_database():
     db: Session = SessionLocal()
 
     try:
+        # Check if data already exists
+        existing_listings = db.query(Listing).count()
+        if existing_listings > 0:
+            print(f"✅ Database already has {existing_listings} listings. Skipping seed.")
+            return
 
         # ========================================================
         # 1. Clear existing data
