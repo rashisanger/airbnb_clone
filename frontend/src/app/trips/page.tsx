@@ -41,9 +41,9 @@ function BookingCard({
     <div className="overflow-hidden rounded-2xl border border-gray-200 bg-white">
       <div className="flex flex-col sm:flex-row">
         <div className="relative h-56 w-full sm:h-auto sm:w-64">
-          {booking.listing?.photo && (
+          {booking.listing?.photos?.[0]?.url && (
             <Image
-              src={booking.listing.photo}
+              src={booking.listing.photos[0].url}
               alt={booking.listing.title}
               fill
               className="object-cover"
@@ -55,7 +55,7 @@ function BookingCard({
           <div className="flex flex-wrap items-start justify-between gap-3">
             <div>
               <p className="text-sm text-gray-500">
-                {booking.listing?.location}
+                {booking.listing?.location_city}, {booking.listing?.location_country}
               </p>
 
               <h3 className="mt-1 text-xl font-semibold">
@@ -87,7 +87,7 @@ function BookingCard({
 
             <div className="flex items-center gap-2">
               <MapPin className="h-4 w-4" />
-              {booking.listing?.location}
+              {booking.listing?.location_city}, {booking.listing?.location_country}
             </div>
 
             <p>
