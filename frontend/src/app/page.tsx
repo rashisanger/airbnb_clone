@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import ExploreClient from "@/components/ExploreClient";
 import { getListings } from "@/lib/api";
 
@@ -13,14 +14,8 @@ interface HomePageProps {
   };
 }
 
-export default async function HomePage({
-  searchParams,
-}: HomePageProps) {
-  // Debug: Log the environment
-  console.log("🔍 NODE_ENV:", process.env.NODE_ENV);
-  console.log("🔍 NEXT_PUBLIC_API_URL:", process.env.NEXT_PUBLIC_API_URL);
-  console.log("🔍 Search Params:", searchParams);
-
+// This is the component that uses searchParams
+async function ListingsContent({ searchParams }: HomePageProps) {
   try {
     const result = await getListings({
       location: searchParams.location,
@@ -34,17 +29,14 @@ export default async function HomePage({
       page_size: 12,
     });
 
-    console.log("✅ Listings fetched:", result.items?.length || 0, "listings");
-
     return (
       <ExploreClient
-        initialListings={result.items}
-        initialTotal={result.total}
+        initialListings={result.items || []}
+        initialTotal={result.total || 0}
       />
     );
   } catch (error) {
     console.error("❌ Error fetching listings:", error);
-    // Return empty state on error
     return (
       <ExploreClient
         initialListings={[]}
@@ -52,4 +44,13 @@ export default async function HomePage({
       />
     );
   }
+}
+
+// Main page component with Suspense
+export default function HomePage({ searchParams }: HomePageProps) {
+  return (
+    <Suspense fallback={<div>Loading listings...</div>}>
+      <ListingsContent searchParams={searchParams} />
+    </Suspense>
+  );
 }
