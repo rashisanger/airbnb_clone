@@ -165,3 +165,18 @@ export interface HostBooking {
   listing_title?: string;
   guest_name?: string;
 }
+
+
+export interface MyBooking {
+  id: number;
+  listing_id: number;
+  guest_id: number;
+  check_in: string;
+  check_out: string;
+  num_guests: number;
+  total_price: number;
+  status: string;
+  created_at: string;
+  listing_title?: string;
+  listing?: Listing;
+}
